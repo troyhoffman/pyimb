@@ -136,14 +136,17 @@ def convert_routing_code (zip):
         raise ValueError (zip)
 
 def unconvert_routing_code (n):
+    # Must be done in this order to avoid a negative return value in a case like a ZIP code of 999984444 
+    if n > 0:
+        n -= 1
+    
+    if n > 100000:
+        n -= 100000
+
     if n > 1000000000:
-        return n - (1000000000 + 100000 + 1)
-    elif n > 100000:
-        return n - (100000 + 1)
-    elif n:
-        return n - 1
-    else:
-        return 0
+        n -= 1000000000
+    
+    return n
 
 def convert_tracking_code (enc, track):
     assert (len (track) == 20)
