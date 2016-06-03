@@ -252,7 +252,7 @@ def decode (codes):
         if bump:
             val += 1287
         r.append (val)
-    if r[0] > 659:
+    if r[0] >= 659:
         fcs |= 1<<10
         r[0] -= 659
     r[9] >>= 1
